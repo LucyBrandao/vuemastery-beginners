@@ -10,66 +10,8 @@
   <div class="nav-bar"></div>
 
   <div id="app">
-    <div class="product">
-
-      <div class="product-image">
-        <img :src="image" />
-      </div>
-
-      <div class="product-info">
-
-        <h1>{{ title }}</h1>
-        <!-- <p>{{ description }}</p> -->
-        <p v-if="inStock">In Stock</p>
-        <p v-else :class="{ outOfStock: !inStock }">Out of Stock</p>
-        <p>{{ sale }}</p>
-        <a :href="link" target="_blank">More products like this</a>
-
-        <ul>
-          <li v-for="detail in details">{{ detail }}</li>
-        </ul>
-
-        <div class="sizes" style="display: flex;">
-          <p class="size" v-for="size in sizes">{{ size }}</p>
-        </div>
-
-        <div
-          v-for="(variant, index) in variants"
-          :key="variant.variantId"
-          class="color-box"
-          :style="{ backgroundColor: variant.variantColor }"
-          @mouseover="updateProduct(index)"
-        >
-        </div>
-
-        <div class="btn-cart">
-          <button
-            @click="addToCart"
-            :disabled="!inStock"
-            :class="{ disabledButton: !inStock }"
-          >
-            Add to Cart
-          </button>
-
-          <button
-            @click="removeFromCart"
-            :disabled="cart == 0"
-            :class="{ disabledButton: cart == 0 }"
-          >
-            Remove to Cart
-          </button>
-
-          <div class="cart">
-            <p>Cart({{cart}})</p>
-          </div>
-        </div>
-        
-
-      </div>
-
-    </div>
-
-  </div>
+    <product :premium="premium"></product>
+  </div> 
 
   <script src="https://unpkg.com/vue"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue"></script>
