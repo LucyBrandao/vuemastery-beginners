@@ -19,6 +19,7 @@ Vue.component('product', {
         <p v-if="inStock">In Stock</p>
         <p v-else :class="{ outOfStock: !inStock }">Out of Stock</p>
         <p>{{ sale }}</p>
+        <p>User is premium: {{ premium }}</p>
         <a :href="link" target="_blank">More products like this</a>
 
         <ul>
@@ -47,17 +48,6 @@ Vue.component('product', {
             Add to Cart
           </button>
 
-          <button
-            @click="removeFromCart"
-            :disabled="cart == 0"
-            :class="{ disabledButton: cart == 0 }"
-          >
-            Remove to Cart
-          </button>
-
-          <div class="cart">
-            <p>Cart({{cart}})</p>
-          </div>
         </div>
 
       </div>
@@ -87,17 +77,22 @@ Vue.component('product', {
                 variantQuantity: 0
             }
         ],
-        sizes: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
-        cart: 0
+        sizes: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL']
       }
     },
     methods: {
       addToCart() {
-          this.cart += 1
+        this.$emit('add-to-cart', this.variants[this.selectedVariant].variantId)
       },
+      // updateCart() {
+      //   this.cart += 1
+      // },
       removeFromCart() {
-          this.cart -= 1
+          this.$emit('remove-from-cart')
       },
+      // removeCart() {
+      //   this.cart -= 1
+      // },
       updateProduct(index) {
         this.selectedVariant = index
         }
@@ -130,6 +125,15 @@ Vue.component('product', {
 var app = new Vue({
   el: '#app',
   data: {
-    premium: true
+    premium: false,
+    cart: []
+  },
+  methods: {
+    updateCart(id) {
+      this.cart.push(id)
+    },
+    removeCart() {
+      this.cart -= 1
+    }
   }
 })
