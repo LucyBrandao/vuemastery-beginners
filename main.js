@@ -11,9 +11,7 @@ Vue.component('product', {
       <div class="product-image">
         <img :src="image" />
       </div>
-
       <div class="product-info">
-
         <h1>{{ title }}</h1>
         <!-- <p>{{ description }}</p> -->
         <p v-if="inStock">In Stock</p>
@@ -21,15 +19,12 @@ Vue.component('product', {
         <p>{{ sale }}</p>
         <p>User is premium: {{ premium }}</p>
         <a :href="link" target="_blank">More products like this</a>
-
         <ul>
           <li v-for="detail in details">{{ detail }}</li>
         </ul>
-
         <div class="sizes" style="display: flex;">
           <p class="size" v-for="size in sizes">{{ size }}</p>
         </div>
-
         <div
           v-for="(variant, index) in variants"
           :key="variant.variantId"
@@ -38,7 +33,6 @@ Vue.component('product', {
           @mouseover="updateProduct(index)"
         >
         </div>
-
         <div class="btn-cart">
           <button
             @click="addToCart"
@@ -47,11 +41,8 @@ Vue.component('product', {
           >
             Add to Cart
           </button>
-
         </div>
-
       </div>
-
     </div>
    `,
     data () {
